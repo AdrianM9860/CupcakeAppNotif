@@ -85,6 +85,7 @@ class SummaryFragment : Fragment() {
             // device if multiple apps can handle this intent)
             startActivity(intent)
         }
+        timer.start()
     }
 
     /**
@@ -105,5 +106,15 @@ class SummaryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+}
+private val timer = object : CountDownTimer(120000, 1000) {
+    override fun onTick(millisUntilFinished: Long) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onFinish() {
+        // Send the notification
+
     }
 }
