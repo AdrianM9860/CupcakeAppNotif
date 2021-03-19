@@ -115,22 +115,22 @@ private val timer = object : CountDownTimer(120000, 1000) {
 
     override fun onFinish() {
         // Send the notification
-
+        addNotification()
     }
 }
 
 private fun addNotfication() {
-    val builder =  NotificationCompat.Builder(SummaryFragment::class.java)
+    val builder =  NotificationCompat.Builder(this, 0.toString())
         .setSmallIcon(R.drawable.cupcake)
         .setContentTitle("Its done!")
         .setContentText("Your order is ready! Come pick it up!")
 
-    val notificationIntent = Intent(this, SummaryFragment::class.java);
-    val contentIntent = PendingIntent.getActivity(SummaryFragment::class.java, 0, notificationIntent,
-        PendingIntent.FLAG_UPDATE_CURRENT)
+    val notificationIntent = Intent(this, SummaryFragment::class.java)
+    val contentIntent: PendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+        0)
     builder.setContentIntent(contentIntent)
 
     //Add as a notification
-    val manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)
+    val manager : NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     manager.notify(0, builder.build())
 }
