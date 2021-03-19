@@ -119,18 +119,18 @@ private val timer = object : CountDownTimer(120000, 1000) {
     }
 }
 
-private fun addNotfication() {
-    val builder =  NotificationCompat.Builder(this, 0.toString())
+private fun addNotification() {
+    var builder =  NotificationCompat.Builder(this.activity, 0.toString())
         .setSmallIcon(R.drawable.cupcake)
         .setContentTitle("Its done!")
         .setContentText("Your order is ready! Come pick it up!")
 
-    val notificationIntent = Intent(this, SummaryFragment::class.java)
-    val contentIntent: PendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+    val notificationIntent = Intent(this.activity, SummaryFragment::class.java)
+    val contentIntent: PendingIntent = PendingIntent.getActivity(this.activity, 0, notificationIntent,
         0)
     builder.setContentIntent(contentIntent)
 
     //Add as a notification
-    val manager : NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+    val manager: NotificationManager = this.activity.getSystemService(Context.NOTIFICATION_SERVICE)
     manager.notify(0, builder.build())
 }
