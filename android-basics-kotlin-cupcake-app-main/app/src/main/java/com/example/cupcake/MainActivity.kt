@@ -15,8 +15,13 @@
  */
 package com.example.cupcake
 
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -45,5 +50,20 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
      */
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
+    }
+    fun addNotification() {
+        var builder =  NotificationCompat.Builder(this, 0.toString())
+            .setSmallIcon(R.drawable.cupcake)
+            .setContentTitle("Its done!")
+            .setContentText("Your order is ready! Come pick it up!")
+
+        val notificationIntent = Intent(this, SummaryFragment::class.java)
+        val contentIntent: PendingIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+            0)
+        builder.setContentIntent(contentIntent)
+
+        //Add as a notification
+        val manager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        manager.notify(0, builder.build())
     }
 }
